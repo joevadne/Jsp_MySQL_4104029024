@@ -32,6 +32,37 @@ public class Database{
       System.out.println(ex);
     }
   }
+  public void insertData (String name , String location , String photo , String description){
+    try {
+      String sql = "insert into travellist (name, location, photo, description) values (?,?,?,?)";
+      PreparedStatement ps = con.prepareStatement(sql);
+      ps.setString(1,name);
+      ps.setString(2,location);
+      ps.setString(3,photo);
+      ps.setString(4,description);
+      int a = ps.executeUpdate();
+    }catch(Exception ex){
+      System.out.println(ex);
+    }
+  }
+  public void editData(String id , String name , String location , String photo , String description){
+    try{
+      String sql = "update travellist set name = '" + name + "' , location = '" + location + "' , description = '" + description + "' , photo = '" + photo + "'  where id = " + id;
+      int a = stmt.executeUpdate(sql);
+    }catch(Exception ex){
+      System.out.println(ex);
+    }
+  }
+  public void deleteData(String id){
+    try{
+      String sql = "delete from travellist where id = " + id + ";";
+      int a = stmt.executeUpdate(sql);
+    }catch(Exception ex){
+      
+      System.out.println(ex);
+    }
+  }
+
   public Connection getCon() {
     return con;
   }
